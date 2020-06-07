@@ -3,7 +3,16 @@ import completeTab
 
 
 
-
+print("""
+Welcome to:
+                          888                         
+                          888                         
+                          888                         
+88888b.d88b.  .d88b.  .d88888888  888.d8888b  8888b.  
+888 "888 "88bd8P  Y8bd88" 888888  88888K         "88b 
+888  888  88888888888888  888888  888"Y8888b..d888888 
+888  888  888Y8b.    Y88b 888Y88b 888     X88888  888 
+888  888  888 "Y8888  "Y88888 "Y88888 88888P'"Y888888\n\n\n """)
 # cmd = input('medussa>')
 # while cmd != 'quit':
 #     cmd = input('medussa>')
