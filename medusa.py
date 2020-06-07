@@ -1,3 +1,8 @@
+import subprocess, readline, glob
+import completeTab
+
+
+
 
 # cmd = input('medussa>')
 # while cmd != 'quit':
@@ -35,6 +40,21 @@ def parse_module(mods):
 
 
 
+
+def run_frida(package_name):
+    subprocess.run('frida -D 9B051FFBA00614 -l agent.js -f {} --no-pause'.format(package_name), shell=True)
+
+
+def complete(text, state):
+    return (glob.glob(text+'*')+[None])[state]
+
+
+
+
+
 mods = ['modules/helpers/sslUnpinning.med']
+package_name = input('Enter package name you want to run:')
+
 parse_module(mods)
+run_frida(package_name)
 
