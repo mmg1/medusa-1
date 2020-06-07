@@ -1,5 +1,5 @@
 #Description: 'Use this module to bypass certificate pinning implementations based on TrustManagerImpl'
-Code:
+#Code:
 
 var array_list = Java.use("java.util.ArrayList");
 var ApiClient = Java.use('com.android.org.conscrypt.TrustManagerImpl');
