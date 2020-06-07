@@ -1,4 +1,4 @@
-Description: 'Use this module to bypass certificate pinning implementations based on TrustManagerImpl'
+#Description: 'Use this module to bypass certificate pinning implementations based on TrustManagerImpl'
 Code:
 
 var array_list = Java.use("java.util.ArrayList");
