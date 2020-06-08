@@ -7,8 +7,9 @@ Medusa is an extensible framework which uses **Frida** in order to trace API abu
 A module (.med file) consists of two sections. The **Description** where the usage of the module is described, e.g. *Description: Use this module to perform the following action* . The **Code** is where the javascript code should be inserted in order to hook a specific API call. What follows is an example of an SSL pinning bypass module:
 
 ```js
-Description: 'Use this module to bypass certificate pinning implementations based on TrustManagerImpl'
-Code:
+#Description: 'Use this module to bypass certificate pinning implementations based on TrustManagerImpl'
+#Help: 'The script will display the message: Bypassing SSL Pinning in case of successful bypass'
+#Code:
 
 var array_list = Java.use("java.util.ArrayList");
 var ApiClient = Java.use('com.android.org.conscrypt.TrustManagerImpl');
