@@ -45,7 +45,6 @@ def show_modules(category):
         for filename in filenames:
             filepath = os.path.join(root,filename)
             presentation.update({filepath: display_tag(filepath,'Description')})
-  
     
     if len(presentation) == 0:
         print('No such category or this category does not contain modules')
@@ -60,6 +59,8 @@ def display_tag(file, what_tag):
         for line in fl:
             if line.startswith('#{}'.format(what_tag)):
                 return line
+            else:
+                return '#invalid tag\n'
 
 def run_frida(force, package_name):
     if force == True:
