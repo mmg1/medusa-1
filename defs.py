@@ -61,8 +61,11 @@ def display_tag(file, what_tag):
             if line.startswith('#{}'.format(what_tag)):
                 return line
 
-def run_frida(package_name):
-    subprocess.run('frida -D 9B051FFBA00614 -l agent.js -f {} --no-pause'.format(package_name), shell=True)
+def run_frida(force, package_name):
+    if force == True:
+        subprocess.run('frida -D 9B051FFBA00614 -l agent.js -f {} --no-pause'.format(package_name), shell=True)
+    else:
+        subprocess.run('frida -D 9B051FFBA00614 -l agent.js {}'.format(package_name), shell=True)
 
 
 def print_help():
@@ -74,6 +77,6 @@ def print_help():
                     - help [module name]        : Displays help for the 
                     - reset                     : Unselects all modules
                     - compile script            : Compiles the script 
-                    - run   [package name]      : Initiates a Frida session and attaches to the sellected package
-                    - run -f [package name]     : Initiates a Frida session and spawns the sellected package
+                    - run       [package name]  : Initiates a Frida session and attaches to the sellected package
+                    - run -f    [package name]  : Initiates a Frida session and spawns the sellected package
                          """)

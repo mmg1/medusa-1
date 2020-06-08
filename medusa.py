@@ -22,6 +22,10 @@ try:
             print_help()
         elif cmd == 'show categories':
             show_categories()
+        elif 'run -f ' in cmd:
+            run_frida(True,cmd.split(' ')[2])
+        elif 'run ' in cmd:
+            run_frida(False,cmd.split(' ')[1])
         elif 'show modules ' in cmd:
             module = cmd.split(' ') 
             show_modules(module[2])
