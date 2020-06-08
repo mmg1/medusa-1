@@ -43,8 +43,9 @@ def show_modules(category):
     
     for root, directories, filenames in os.walk('modules/{}'.format(category)):
         for filename in filenames:
-            filepath = os.path.join(root,filename)
-            presentation.update({filepath: display_tag(filepath,'Description')})
+            if filename.endswith('.med'):
+                filepath = os.path.join(root,filename)
+                presentation.update({filepath: display_tag(filepath,'Description')})
     
     if len(presentation) == 0:
         print('No such category or this category does not contain modules')
