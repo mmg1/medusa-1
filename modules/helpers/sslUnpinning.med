@@ -1,4 +1,5 @@
 #Description: 'Use this module to bypass certificate pinning implementations based on TrustManagerImpl'
+#Help: "In case of successfull bypass it will displate the message: Bypassing SSL Pinning"
 #Code:
 
 var array_list = Java.use("java.util.ArrayList");

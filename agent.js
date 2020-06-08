@@ -13,4 +13,38 @@ Java.perform(function() {
     } catch (err) {
                 console.log('Error loading module modules/helpers/sslUnpinning.med');
         }
+ try { 
+		
+		    
+		    var window = Java.use('android.view.Window');
+		 
+		    window.setFlags.implementation = function(a,b)
+		    {
+		        console.log("Cancelling Flag Secure");
+		        
+		    }
+		
+		   
+    } catch (err) {
+                console.log('Error loading module modules/helpers/flagSecure.med');
+        }
+ try { 
+		
+		
+		var abstractCursor = Java.use('android.database.AbstractCursor');
+		
+		abstractCursor.getString.implementation = function(column){
+		        console.log(this.getString(column));
+		        return this.getString(column);
+		
+		}
+		
+		abstractCursor.getColumnIndex.implementation = function(columnName){
+		        
+		        console.log("\n[+] DB Query for:" + columnName + " ,Result:" + this.getString(this.getColumnIndex(columnName)));
+		        return this.getColumnIndex(columnName);
+		}
+    } catch (err) {
+                console.log('Error loading module modules/spyware/contentProvider.med');
+        }
 });

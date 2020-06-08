@@ -1,6 +1,4 @@
-import subprocess, readline, glob
-import completeTab
-
+from defs import *
 
 
 print("""
@@ -12,58 +10,52 @@ Welcome to:
 888 "888 "88bd8P  Y8bd88" 888888  88888K         "88b 
 888  888  88888888888888  888888  888"Y8888b..d888888 
 888  888  888Y8b.    Y88b 888Y88b 888     X88888  888 
-888  888  888 "Y8888  "Y88888 "Y88888 88888P'"Y888888\n\n\n """)
-# cmd = input('medussa>')
-# while cmd != 'quit':
-#     cmd = input('medussa>')
+888  888  888 "Y8888  "Y88888 "Y88888 88888P'"Y888888\n\n\n Type help for options\n\n""")
 
+module_list=[];
 
+cmd = ''
+try:
+    while cmd != 'exit':
+        cmd = input(CYAN+'medussa>'+RESET)
+        if cmd == 'help':
+            print_help()
+        elif cmd == 'show categories':
+            show_categories()
+        elif 'show modules ' in cmd:
+            module = cmd.split(' ') 
+            show_modules(module[2])
+        elif 'help ' in cmd:
+            module = cmd.split(' ')
+            print('\n'+BLUE+display_tag(module[1],'Help')+RESET)
+        elif 'use' in cmd:
+            module = cmd.split(' ')
+            module_list.append(module[1])
+            print("\nCurrent Mods:")
+            for mod in module_list:
+                print(mod)
+            print()
+        elif cmd == 'reset':
+            module_list=[]
+        elif cmd == 'compile script':
+            parse_module(module_list)
+        elif cmd == 'exit':
+            break
+        elif cmd == 'show mods':
+            print("\nCurrent Mods:")
+            for mod in module_list:
+                print(mod)
+            print()
+        else:
+            print('Invalid command !')
 
-
-##
-    #Mods is a list of med files
-    #the following function iterates trough
-    #this files and add their content 
-    #to the agent.js
-##
-
-def parse_module(mods):
-    hooks = ['Java.perform(function() {']
-    for file in mods:
-        with open(file) as mod:
-            hooks.append(' try { ')
-            for line in mod:
-                if not line.startswith('#'):
-                    hooks.append('\t\t'+line.strip('\n'))
-
-            hooks.append("""    } catch (err) {
-                console.log('Error loading module %s');
-        }"""%file)
-    
-
-    hooks.append('});')
-
-    with open('agent.js','w') as agent:
-        for line in hooks:
-            agent.write('%s\n' % line)
-
-
-
-
-def run_frida(package_name):
-    subprocess.run('frida -D 9B051FFBA00614 -l agent.js -f {} --no-pause'.format(package_name), shell=True)
-
-
-def complete(text, state):
-    return (glob.glob(text+'*')+[None])[state]
+except:
+    print('Command was not understood, type help to read the availlable commands!! \n\nExiting !!')
 
 
 
 
 
-mods = ['modules/helpers/sslUnpinning.med']
-package_name = input('Enter package name you want to run:')
+#parse_module(mods)
 
-parse_module(mods)
-run_frida(package_name)
 
