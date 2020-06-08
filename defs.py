@@ -59,8 +59,7 @@ def display_tag(file, what_tag):
         for line in fl:
             if line.startswith('#{}'.format(what_tag)):
                 return line
-            else:
-                return '#invalid tag\n'
+
 
 def run_frida(force, package_name):
     if force == True:
