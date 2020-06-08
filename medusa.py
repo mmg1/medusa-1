@@ -34,13 +34,20 @@ try:
         elif 'help ' in cmd:
             module = cmd.split(' ')
             print('\n'+BLUE+display_tag(module[1],'Help')+RESET)
-        elif 'use' in cmd:
+        elif 'add ' in cmd:
             module = cmd.split(' ')
             module_list.append(module[1])
             print("\nCurrent Mods:")
             for mod in module_list:
                 print(mod)
             print()
+        elif 'rem ' in cmd:
+            module = cmd.split(' ')
+            module_list.remove(module[1])
+            print("\nCurrent Mods:")
+            for mod in module_list:
+                print(mod)
+            print()            
         elif cmd == 'reset':
             module_list=[]
         elif cmd == 'compile script':

@@ -80,4 +80,6 @@ def print_help():
                     - compile script            : Compiles the script 
                     - run       [package name]  : Initiates a Frida session and attaches to the sellected package
                     - run -f    [package name]  : Initiates a Frida session and spawns the sellected package
-                         """)
+                    
+                    Use the /modules/myModules/scratchpad.med to insert your own hooks and include them to the agent.js 
+                    using the 'compile script' command""")

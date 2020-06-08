@@ -29,7 +29,35 @@ The **main controller script is the medusa.py** which can be inititiated by issu
 
 > $python3 medusa.med
 
-The user may navigate through the modules and pick the ones that wants to 'trace'. After selection a Frida session will be initiated where the API functions implemented in the 'med' files will be traced.  
+
+
+Available commands:
+
+​                    \- show categories           		:Displays the availlable module categories (start here)
+
+​                    \- show modules [category]   :Displays the availlable modules for the selected category
+
+​                    \- show mods                			:Shows loaded modules
+
+​                    \- use [module name]         	:Selects a module which will be added to the final script
+
+​                    \- help [module name]        	:Displays help for the 
+
+​                    \- reset                   					 :Unselects all modules
+
+​                    \- compile script            			:Compiles the script 
+
+​                    \- run       [package name]  	 :Initiates a Frida session and attaches to the sellected package
+
+​                    \- run -f   [package name]  	 :Initiates a Frida session and spawns the sellected package
+
+​                    
+
+Use the **/modules/myModules/scratchpad.med** to write your own hooks and include them to the agent.js using the 'compile script' command.
+
+#### Features:
+
+The user may navigate through the modules and pick the ones that wants to 'trace'. After selection a Frida session will be initiated where the API functions implemented in the 'med' files will be traced.  The modules can be dynamically added or removed during runtime. 
 
 
 

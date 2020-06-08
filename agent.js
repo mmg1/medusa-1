@@ -1,129 +1,74 @@
 Java.perform(function() {
  try { 
 		
+		    var splash = Java.use("com.medialight.alertanoo.SplashScreen");
 		
-		var Builder = Java.use('okhttp3.CertificatePinner$Builder');
-		var s=Java.use("java.lang.String");
+		    var rootBeer = Java.use("com.scottyab.rootbeer.RootBeerNative");
+		    var check1 = Java.use('f.d.a.b');
+		    var check2 = Java.use('f.d.a.a');
+		    var check3 = Java.use('f.a.a.a.a');
+		    var check4 = Java.use('f.d.a.c.a');
+		    var runtime = Java.use('java.lang.Runtime');
 		
-		
-		
-		Builder.add.overload('java.lang.String', '[Ljava.lang.String;').implementation = function(a, b) {
-		    console.log('Bypassing apturicovid-api.spkc.gov.it pinning ')
-		    
-		    var x=s.$new('dontGoThere.com');
-		
-		    return this.add(x,b);
-		}
-		
-		
-		console.log('')
-		console.log('===')
-		console.log('* Injecting hooks into common certificate pinning methods *')
-		console.log('===')
-		
-		var X509TrustManager = Java.use('javax.net.ssl.X509TrustManager');
-		var SSLContext = Java.use('javax.net.ssl.SSLContext');
-		
-		// build fake trust manager
-		var TrustManager = Java.registerClass({
-		    name: 'com.sensepost.test.TrustManager',
-		    implements: [X509TrustManager],
-		    methods: {
-		        checkClientTrusted: function (chain, authType) {
-		        },
-		        checkServerTrusted: function (chain, authType) {
-		        },
-		        getAcceptedIssuers: function () {
-		            return [];
-		        }
-		    }
-		});
-		
-		// pass our own custom trust manager through when requested
-		var TrustManagers = [TrustManager.$new()];
-		var SSLContext_init = SSLContext.init.overload(
-		    '[Ljavax.net.ssl.KeyManager;', '[Ljavax.net.ssl.TrustManager;', 'java.security.SecureRandom'
-		);
-		SSLContext_init.implementation = function (keyManager, trustManager, secureRandom) {
-		    
-		
-		    console.log('! Intercepted trustmanager request');
-		    SSLContext_init.call(this, keyManager, TrustManagers, secureRandom);
-		};
-		
-		console.log('* Setup custom trust manager');
-		
-		// okhttp3
-		try {
-		    var CertificatePinner = Java.use('okhttp3.CertificatePinner');
-		    CertificatePinner.check.overload('java.lang.String', 'java.util.List').implementation = function (str) {
-		        console.log('! Intercepted okhttp3: ' + str);
-		        return;
-		    };
-		
-		    console.log('* Setup okhttp3 pinning')
-		} catch(err) {
-		    console.log('* Unable to hook into okhttp3 pinner')
-		}
-		
-		// trustkit
-		try {
-		    var Activity = Java.use("com.datatheorem.android.trustkit.pinning.OkHostnameVerifier");
-		    Activity.verify.overload('java.lang.String', 'javax.net.ssl.SSLSession').implementation = function (str) {
-		        console.log('! Intercepted trustkit{1}: ' + str);
-		        return true;
-		    };
-		
-		    Activity.verify.overload('java.lang.String', 'java.security.cert.X509Certificate').implementation = function (str) {
-		        console.log('! Intercepted trustkit{2}: ' + str);
-		        return true;
-		    };
-		
-		    console.log('* Setup trustkit pinning')
-		} catch(err) {
-		    console.log('* Unable to hook into trustkit pinner')
-		}
-		
-		// TrustManagerImpl
-		try {
-		    var TrustManagerImpl = Java.use('com.android.org.conscrypt.TrustManagerImpl');
-		    TrustManagerImpl.verifyChain.implementation = function (untrustedChain, trustAnchorChain, host, clientAuth, ocspData, tlsSctData) {
-		        console.log('! Intercepted TrustManagerImp: ' + host);
-		        return untrustedChain;
+		    splash.onCreate.implementation = function(bandle){
+		        console.log('splash on create');
+		        this.onCreate(bandle);
 		    }
 		
-		    console.log('* Setup TrustManagerImpl pinning')
-		} catch (err) {
-		    console.log('* Unable to hook into TrustManagerImpl')
-		}
-		
-		// Appcelerator
-		try {
-		    var PinningTrustManager = Java.use('appcelerator.https.PinningTrustManager');
-		    PinningTrustManager.checkServerTrusted.implementation = function () {
-		        console.log('! Intercepted Appcelerator');
+		    rootBeer.$init.implementation = function(bool){
+		        console.log('rootBeer constructor');
+		        rootBeer.a = false
 		    }
 		
-		    console.log('* Setup Appcelerator pinning')
-		} catch (err) {
-		    console.log('* Unable to hook into Appcelerator pinning')
-		}
+		    runtime.exec.overload('java.lang.String').implementation = function(cmd){
+		        console.log("CMD:"+ cmd);
+		        console.log("Result: "+this.exec(cmd))
+		        return this.exec('ls');   
+		    }
+		
+		    check4.a.overload().implementation = function(){
+		        console.log ('check4 bypass');
+		        return '';
+		    }
+		
+		    check3.a.overload('java.lang.String','java.lang.String','java.lang.String').implementation = function(a,b,c){
+		        console.log(a,b,c);
+		        return '';
+		    }
+		
+		    check1.a.overload('java.util.List').implementation = function(a){
+		        console.log('Bypassing check1');
+		        return false;
+		    }
+		
+		    check1.a.overload('java.lang.String').implementation = function(a){
+		        console.log('Bypassing check2 for '+a);
+		        return false;
+		    }
+		
+		    check2.a.implementation = function(){
+		        console.log('Bypassing check3');
+		        return this.a();
+		    }
     } catch (err) {
-                console.log('Error loading module modules/helpers/universalSSLpinningBypass.med');
+                console.log('Error loading module modules/myModules/scratchpad.med');
         }
  try { 
 		
-		    
-		    var window = Java.use('android.view.Window');
-		 
-		    window.setFlags.implementation = function(a,b)
-		    {
-		        console.log("Cancelling Flag Secure");
-		        
-		    }
+		var abstractCursor = Java.use('android.database.AbstractCursor');
 		
-		   
+		abstractCursor.getString.implementation = function(column){
+		        console.log(this.getString(column));
+		        return this.getString(column);
+		
+		}
+		
+		abstractCursor.getColumnIndex.implementation = function(columnName){
+		        
+		        console.log("\n[+] DB Query for:" + columnName + " ,Result:" + this.getString(this.getColumnIndex(columnName)));
+		        return this.getColumnIndex(columnName);
+		}
     } catch (err) {
-                console.log('Error loading module modules/helpers/flagSecure.med');
+                console.log('Error loading module modules/spyware/contentProvider.med');
         }
 });
