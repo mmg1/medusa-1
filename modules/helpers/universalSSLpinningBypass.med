@@ -2,20 +2,6 @@
 #Help: 'https://gist.github.com/cubehouse/56797147b5cb22768b500f25d3888a22'
 #Code:
 
-var Builder = Java.use('okhttp3.CertificatePinner$Builder');
-var s=Java.use("java.lang.String");
-
-
-
-Builder.add.overload('java.lang.String', '[Ljava.lang.String;').implementation = function(a, b) {
-    console.log('Bypassing apturicovid-api.spkc.gov.it pinning ')
-    
-    var x=s.$new('dontGoThere.com');
-
-    return this.add(x,b);
-}
-
-
 console.log('')
 console.log('===')
 console.log('* Injecting hooks into common certificate pinning methods *')

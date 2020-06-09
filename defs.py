@@ -74,9 +74,10 @@ def print_help():
                     - show categories           : Displays the availlable module categories (start here)
                     - show modules [category]   : Displays the availlable modules for the selected category
                     - show mods                 : Shows loaded modules
-                    - use [module name]         : Selects a module which will be added to the final script
+                    - add [module name]         : Selects a module which will be added to the final script
+                    - rem [module name]         : Removes a module from the list that will be loaded
+                    - reset                     : Removes all modules from the list that will be loaded
                     - help [module name]        : Displays help for the 
-                    - reset                     : Unselects all modules
                     - compile script            : Compiles the script 
                     - run       [package name]  : Initiates a Frida session and attaches to the sellected package
                     - run -f    [package name]  : Initiates a Frida session and spawns the sellected package
