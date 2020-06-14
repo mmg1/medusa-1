@@ -1,0 +1,12 @@
+#Description: 'Use this module to enumerate the loaded classes'
+#Help: "https://codeshare.frida.re/@BenGardiner/android-list-loaded-classes/"
+#Code:
+
+
+
+    Java.enumerateLoadedClasses({
+        onMatch: function(className) {
+            console.log(className);
+        },
+        onComplete: function() {}
+    });

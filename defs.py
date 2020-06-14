@@ -37,6 +37,12 @@ def show_categories():
         print(module[1])
     print()
 
+def show_all():
+    for root, directories, filenames in os.walk('modules/'):
+        for filename in sorted(filenames):
+            if filename.endswith('.med'):
+                filepath = os.path.join(root,filename)
+                print(BLUE+filepath+RESET)
 
 def show_modules(category):
     presentation = {}
@@ -62,17 +68,23 @@ def display_tag(file, what_tag):
                 return line
 
 
-def run_frida(force, package_name):
+def run_frida(force, package_name, device):
     if force == True:
-        subprocess.run('frida -D 9B051FFBA00614 -l agent.js -f {} --no-pause'.format(package_name), shell=True)
+        subprocess.run('frida -D {} -l agent.js -f {} --no-pause'.format(device,package_name), shell=True)
     else:
-        subprocess.run('frida -D 9B051FFBA00614 -l agent.js {}'.format(package_name), shell=True)
+        subprocess.run('frida -D {} -l agent.js {}'.format(device,package_name), shell=True)
 
+def send_keys(text,device):
+    os.popen("adb -s {} shell input text {}".format(device,text))
+
+def list_packages(device):
+    subprocess.run('adb -s {} shell pm list packages -3'.format(device), shell=True)
 
 def print_help():
     print("""Available commands:
                     - show categories           : Displays the availlable module categories (start here)
                     - show modules [category]   : Displays the availlable modules for the selected category
+                    - show all                  : Show all availlable modules
                     - show mods                 : Shows loaded modules
                     - add [module name]         : Selects a module which will be added to the final script
                     - rem [module name]         : Removes a module from the list that will be loaded
@@ -81,6 +93,10 @@ def print_help():
                     - compile script            : Compiles the script 
                     - run       [package name]  : Initiates a Frida session and attaches to the sellected package
                     - run -f    [package name]  : Initiates a Frida session and spawns the sellected package
-                    
-                    Use the /modules/myModules/scratchpad.med to insert your own hooks and include them to the agent.js 
+                    - send text [text]          : sends the text to the device
+                    - list packages             : Lists 3rd party packages in the mobile device 
+
+            Available System commands: clear, ls, nano, cat,grep
+
+                    Tip: Use the /modules/myModules/scratchpad.med to insert your own hooks and include them to the agent.js 
                     using the 'compile script' command""")

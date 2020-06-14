@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import readline
+import os
 from defs import *
 
 
@@ -16,6 +17,20 @@ Welcome to:
 
 module_list=[];
 
+device_list = os.popen("adb devices -l").read().split('\n')
+
+device_list.pop()
+index = 1
+
+for device in device_list[1:-1]:
+    print("{}) {}".format(index,device))
+    index+=1
+
+index = int(input('Please choose the device to operate:'))
+operation_device = device_list[index].split()[0]
+
+
+
 cmd = ''
 try:
     while cmd != 'exit':
@@ -24,10 +39,17 @@ try:
             print_help()
         elif cmd == 'show categories':
             show_categories()
+        elif 'list packages' in cmd:
+            list_packages(operation_device)
         elif 'run -f ' in cmd:
-            run_frida(True,cmd.split(' ')[2])
+            run_frida(True,cmd.split(' ')[2],operation_device)
         elif 'run ' in cmd:
-            run_frida(False,cmd.split(' ')[1])
+            run_frida(False,cmd.split(' ')[1],operation_device)
+        elif 'send text ' in cmd:
+            text = cmd.split('text') 
+            send_keys(text[1],operation_device)
+        elif cmd == 'show all':
+            show_all()
         elif 'show modules ' in cmd:
             module = cmd.split(' ') 
             show_modules(module[2])
@@ -59,6 +81,9 @@ try:
             for mod in module_list:
                 print(mod)
             print()
+        elif cmd == 'clear' or 'ls' in cmd or 'nano' in cmd or 'cat ' in cmd or 'grep ' in cmd:
+            os.system(cmd)
+            #print('Invalid command !')
         else:
             print('Invalid command !')
 
